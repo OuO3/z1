@@ -1,0 +1,26 @@
+name: Export Carefree skin
+
+on:
+  push:
+    paths:
+      - "Carefree+2.6.dsf"
+      - ".github/workflows/export-skin.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  export-skin:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Upload original DSF as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: carefree-2.6-dsf
+          path: Carefree+2.6.dsf
+          if-no-files-found: error
+          retention-days: 1
